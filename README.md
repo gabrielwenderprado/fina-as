@@ -35,6 +35,10 @@ Depois abra o endereço local que o Vite mostrar, normalmente `http://localhost:
 
 O build usa caminhos relativos, então funciona em endereço de projeto como `usuario.github.io/nome-do-repositorio/`. A instalação exige HTTPS. A primeira abertura precisa de internet; depois, o service worker guarda os arquivos da interface para abrir o app offline.
 
+## Saldo total da carteira
+
+O valor no topo soma os rendimentos menos contas fixas e gastos variáveis de todos os meses registados até ao mês atual. Ele não muda quando se consulta outro mês no filtro. Registar uma conta ou gasto no mês atual diminui o saldo total; registar uma entrada aumenta-o. A previsão de sobra no painel principal continua a mostrar apenas o resultado do mês selecionado.
+
 ### Se o build falhar no Actions
 
 Este pacote inclui `tw-animate-css` no `package.json` e no `pnpm-lock.yaml`, exigido pela folha de estilos. Se já enviou uma versão anterior que não listava essa dependência, substitua **ambos** os arquivos no repositório pelos desta versão e confirme que o workflow está em `.github/workflows/deploy-pages.yml`. O push inicia uma nova compilação.

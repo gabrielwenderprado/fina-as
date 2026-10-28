@@ -308,6 +308,36 @@ button:focus-visible, input:focus-visible { outline: 3px solid #d79359; outline-
 .backup-local-note p { margin: 0; font-family: "DM Sans", sans-serif; font-size: 11px; line-height: 1.55; }
 .backup-action { width: 100%; min-height: 43px; margin: 5px 0; }
 .backup-modal .secondary-button { border: 1px solid #eee7db; }
+
+.topbar-right { display: flex; align-items: center; gap: 17px; min-width: 0; }
+.topbar-balance { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; min-width: 0; white-space: nowrap; }
+.topbar-balance span { color: #92897c; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.topbar-balance strong { color: #315a43; font-size: 14px; font-variant-numeric: tabular-nums; letter-spacing: -.025em; }
+@media (max-width: 760px) {
+  .topbar-right { gap: 9px; }
+  .topbar-balance span { font-size: 8px; }
+  .topbar-balance strong { font-size: 12px; }
+}
+@media (max-width: 520px) {
+  .brand-copy small { display: none; }
+  .topbar-right { gap: 6px; }
+  .topbar-balance span { font-size: 8px; letter-spacing: .06em; }
+  .topbar-balance strong { font-size: 11px; }
+  .topbar-actions { gap: 4px; }
+  .tool-button { width: 34px; min-height: 34px; padding: 0; }
+  .tool-button span { display: none; }
+}
+@media (max-width: 360px) {
+  .topbar { padding: 0 10px; }
+  .brand { gap: 8px; }
+  .brand-mark { width: 32px; height: 32px; }
+  .brand-copy strong { font-size: 14px; }
+  .topbar-right { gap: 4px; }
+  .topbar-balance span { font-size: 7px; }
+  .topbar-balance strong { font-size: 10px; }
+  .topbar-actions { gap: 3px; }
+  .tool-button { width: 30px; }
+}
 .backup-footnote { margin: 12px 0 0; color: #9a9388; font-family: "DM Sans", sans-serif; font-size: 10px; line-height: 1.5; }
 .install-instructions { display: flex; flex-direction: column; gap: 11px; margin-top: 15px; }
 .install-instructions > div { display: flex; gap: 11px; padding: 13px; border: 1px solid #f0e8dc; border-radius: 13px; background: #fffaf2; }

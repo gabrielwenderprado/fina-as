@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent } from "react";
+import { calculateCumulativeBalance } from "../lib/cumulativeBalance";
 
 type EntryType = "income" | "fixed" | "expense";
 type Entry = {
@@ -171,6 +172,11 @@ export default function Home() {
   const [draft, setDraft] = useState<Draft>({ type: "income", description: "", amount: "", entryDate: `${monthNow()}-01` });
 
   const entries = stored.entries;
+  const currentPeriod = monthNow();
+  const cumulativeBalance = useMemo(
+    () => calculateCumulativeBalance(entries, currentPeriod),
+    [entries, currentPeriod],
+  );
 
   useEffect(() => {
     if (stored.unreadable) return;
@@ -329,9 +335,15 @@ export default function Home() {
           <BrandMark />
           <span className="brand-copy"><strong>mês a certo</strong><small>finanças no seu ritmo</small></span>
         </a>
-        <div className="topbar-actions">
-          <button className="tool-button" onClick={() => setShowBackup(true)} aria-label="Backup e restauração dos dados"><HardDriveDownload size={16} /><span>Backup</span></button>
-          <button className="tool-button install-tool" onClick={() => void installApp()} aria-label="Instalar app no celular"><Smartphone size={16} /><span>Instalar</span></button>
+        <div className="topbar-right">
+          <div className="topbar-balance" role="status" aria-live="polite" aria-label={stored.unreadable ? "Saldo acumulado indisponível; restaure um backup." : `Saldo acumulado até ${monthLabel(currentPeriod)}: ${formatMoney(cumulativeBalance)}`} title={`Acumulado até ${monthLabel(currentPeriod)}, independente do mês filtrado`}>
+            <span>Saldo na carteira</span>
+            <strong>{stored.unreadable ? "—" : formatMoney(cumulativeBalance)}</strong>
+          </div>
+          <div className="topbar-actions">
+            <button className="tool-button" onClick={() => setShowBackup(true)} aria-label="Backup e restauração dos dados"><HardDriveDownload size={16} /><span>Backup</span></button>
+            <button className="tool-button install-tool" onClick={() => void installApp()} aria-label="Instalar app no celular"><Smartphone size={16} /><span>Instalar</span></button>
+          </div>
         </div>
       </header>
 
